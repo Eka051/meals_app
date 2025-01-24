@@ -16,7 +16,7 @@ class MealsScreen extends StatelessWidget {
     if (meals.isEmpty) {
       content = Center(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               'Uh oh! No meals found!',
