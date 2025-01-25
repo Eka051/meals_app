@@ -1,16 +1,7 @@
 # Include Dart files for language stats
 *.dart linguist-language=Dart
 
-# Include Kotlin files for Android
-*.kt linguist-language=Kotlin
-*.kts linguist-language=Kotlin
-
-# Include Swift files for iOS
-*.swift linguist-language=Swift
-
 # Exclude platform-specific files
-android/** linguist-vendored
-ios/** linguist-vendored
 windows/** linguist-vendored
 linux/** linguist-vendored
 macos/** linguist-vendored
