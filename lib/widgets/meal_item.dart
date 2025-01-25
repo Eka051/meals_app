@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meals_app/models/meal.dart';
+import 'package:meals_app/widgets/meal_item_trait.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class MealItem extends StatelessWidget {
@@ -32,42 +33,37 @@ class MealItem extends StatelessWidget {
               right: 0,
               left: 0,
               child: Container(
-                  color: Colors.black54,
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 6,
-                    horizontal: 44,
-                  ),
-                  child: Column(
-                    children: [
-                      Text(
-                        meal.title,
-                        maxLines: 2,
-                        textAlign: TextAlign.center,
-                        softWrap: true,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
+                color: Colors.black54,
+                padding: const EdgeInsets.symmetric(
+                  vertical: 6,
+                  horizontal: 44,
+                ),
+                child: Column(
+                  children: [
+                    Text(
+                      meal.title,
+                      maxLines: 2,
+                      textAlign: TextAlign.center,
+                      softWrap: true,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
                       ),
-                      const SizedBox(height: 12),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.schedule),
-                          const SizedBox(width: 4),
-                          Text(
-                            '${meal.duration} min',
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 12,
-                            ),
-                          )
-                        ],
-                      )
-                    ],
-                  )),
+                    ),
+                    const SizedBox(height: 12),
+                    Row(
+                      children: [
+                        MealItemTrait(
+                          icon: Icons.schedule,
+                          label: '${meal.duration} min',
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ),
             ),
           ],
         ),
