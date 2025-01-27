@@ -101,6 +101,7 @@ class _TabsScreenState extends State<TabsScreen> {
       activePage = MealsScreen(
         meals: _favoriteMeals,
         onToggleFavorite: _toogleMealFavoriteStatus,
+        isFavorite: (meal) => _favoriteMeals.contains(meal),
       );
       activePageTitle = 'Your Favorites';
     }
