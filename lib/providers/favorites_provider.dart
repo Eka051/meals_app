@@ -5,10 +5,12 @@ class FavoriteMealsNotifier extends StateNotifier<List<Meal>> {
   FavoriteMealsNotifier() : super([]);
 
   void toggleFavorite(Meal meal) {
-    if (state.contains(meal)) {
-      state = List.from(state)..remove(meal);
+    final mealIsFavorite = state.contains(meal);
+
+    if (mealIsFavorite) {
+      state = state.where((m) => m.id != meal.id).toList();
     } else {
-      state = List.from(state)..add(meal);
+      state = [...state, meal];
     }
   }
 }
