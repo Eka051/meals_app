@@ -4,12 +4,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // import 'package:meals_app/widgets/main_drawer.dart';
 import 'package:meals_app/providers/filters_provider.dart';
 
-
-
 class FiltersScreen extends ConsumerStatefulWidget {
-  const FiltersScreen({super.key, required this.currentFilters});
-
-  final Map<Filter, bool> currentFilters;
+  const FiltersScreen({
+    super.key,
+  });
 
   @override
   ConsumerState<FiltersScreen> createState() {
@@ -26,10 +24,11 @@ class _FiltersScreenState extends ConsumerState<FiltersScreen> {
   @override
   void initState() {
     super.initState();
-    _glutenFreeFilterSet = widget.currentFilters[Filter.glutenfree]!;
-    _lactoseFreeFilterSet = widget.currentFilters[Filter.lactosefree]!;
-    _vegetarianFilterSet = widget.currentFilters[Filter.vegetarian]!;
-    _veganFilterSet = widget.currentFilters[Filter.vegan]!;
+    final activeFilters = ref.read(filterProviders);
+    _glutenFreeFilterSet = activeFilters[Filter.glutenfree]!;
+    _lactoseFreeFilterSet = activeFilters[Filter.lactosefree]!;
+    _vegetarianFilterSet = activeFilters[Filter.vegetarian]!;
+    _veganFilterSet = activeFilters[Filter.vegan]!;
   }
 
   @override
@@ -51,15 +50,17 @@ class _FiltersScreenState extends ConsumerState<FiltersScreen> {
       body: PopScope(
         canPop: false,
         onPopInvokedWithResult: (bool didPop, dynamic result) {
-          if (didPop) return;{
-            Navigator.of(context).pop({
-              Filter.glutenfree: _glutenFreeFilterSet,
-              Filter.lactosefree: _lactoseFreeFilterSet,
-              Filter.vegetarian: _vegetarianFilterSet,
-              Filter.vegan: _veganFilterSet,
-            });
+          ref.read(filterProviders.notifier).setFilters({
+            Filter.glutenfree: _glutenFreeFilterSet,
+            Filter.lactosefree: _lactoseFreeFilterSet,
+            Filter.vegetarian: _vegetarianFilterSet,
+            Filter.vegan: _veganFilterSet,
+          });
+          if (didPop) return;
+          {
+            Navigator.of(context).pop();
           }
-        }, 
+        },
         child: Column(
           children: [
             SwitchListTile(
