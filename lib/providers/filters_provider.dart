@@ -25,6 +25,7 @@ class FilterNotifier extends StateNotifier<Map<Filter, bool>> {
   }
 }
 
-final filterProviders = StateNotifierProvider((ref) {
-  return FilterNotifier();
-});
+final filterProviders =
+    StateNotifierProvider<FilterNotifier, Map<Filter, bool>>(
+  (ref) => FilterNotifier(),
+);
