@@ -32,13 +32,13 @@ class _CategoriesScreenState extends State<CategoriesScreen>
     );
 
     _animationController.forward();
-
   }
-    @override
-    void dispose() {
-      _animationController.dispose();
-      super.dispose();
-    }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
 
   void _selectCategory(BuildContext context, Category category) {
     final filteredMeals = widget.availableMeals
@@ -74,11 +74,13 @@ class _CategoriesScreenState extends State<CategoriesScreen>
                 onSelectCategory: () => _selectCategory(context, category)),
         ],
       ),
-      builder: (context, child) => Padding(
-          padding: EdgeInsets.only(
-            top: 100 - _animationController.value * 100,
-          ),
-          child: child),
+      builder: (context, child) => SlideTransition(
+        position: Tween<Offset>(
+          begin: const Offset(0, 0.3),
+          end: const Offset(0, 0),
+        ).animate(CurvedAnimation(
+            parent: _animationController, curve: Curves.easeInOut)),
+      ),
     );
   }
 }
